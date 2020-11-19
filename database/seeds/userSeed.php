@@ -15,9 +15,9 @@ class userSeed extends Seeder
     	User::truncate();
 
         $user = [
-	        ['email' => 'admin@email.com', 'nama' => 'admin', 'password' => '12345', 'nohp' => '083876854003', 'alamat' => 'pandeglang', 'akses' => '0'],
-	        ['email' => 'users@email.com', 'nama' => 'users', 'password' => md5('12345'), 'nohp' => '083876854003', 'alamat' => 'pandeglang', 'akses' => '1'],
-            ['email' => 'rahmat@email.com', 'nama' => 'rahmat', 'password' => md5('12345'), 'nohp' => '083876854003', 'alamat' => 'pandeglang', 'akses' => '1'],
+	        ['email' => 'admin@email.com', 'nama' => 'admin', 'password' => '12345', 'jk' => 'pria', 'nohp' => '083876854003', 'alamat' => 'pandeglang', 'akses' => '0'],
+	        ['email' => 'users@email.com', 'nama' => 'users', 'password' => md5('12345'), 'jk' => 'pria', 'nohp' => '083876854003', 'alamat' => 'pandeglang', 'akses' => '1'],
+            ['email' => 'rahmat@email.com', 'nama' => 'rahmat', 'password' => md5('12345'), 'jk' => 'pria', 'nohp' => '083876854003', 'alamat' => 'pandeglang', 'akses' => '1'],
 	    ];
 
 	    User::insert($user);

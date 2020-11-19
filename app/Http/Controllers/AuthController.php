@@ -17,6 +17,7 @@ use Session;
 use Validator;
 use Cookie;
 use App\Models\User;
+use App\Models\Address;
 
 class AuthController extends Controller
 {
@@ -140,9 +141,23 @@ class AuthController extends Controller
             $User->nama               =    Input::get('user_reg_name');
             $User->password           =    bcrypt( trim(Input::get('reg_password')) );
             $User->nohp               =    Input::get('reg_telepon');
+            $User->jk               =    Input::get('reg_jk');
             $User->akses              =     '0';
             $User->alamat             =     '';
             $User->save();
+
+            $cat_array = array();
+
+            foreach(Input::get('alamat') as $cat_id){
+              $cat_data = array( 'id_user'  =>  $User->id, 'alamat'  =>  $cat_id );
+
+              array_push($cat_array, $cat_data);
+            }
+
+            if(count($cat_array) > 0){
+              Address::insert( $cat_array );    
+            }
+            Session::flash('success-message', "Success register" );
             return redirect()->route('admin.login');
         }
       }

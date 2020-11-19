@@ -88,6 +88,39 @@
             @if(!empty($errors->first('reg_telepon')))
             <p class="text-red"><i class="icon fa fa-ban"></i> {{ $errors->first('reg_telepon') }}</p>
             @endif
+
+          <div class="input-group mb-3">
+            <label for="reg_jk" class="control-label">Jenis Kelamin </label>
+            <select class="form-control" name="reg_jk">
+              <option value="pria"> Pria</option>
+              <option value="wanita"> Wanita</option>
+            </select>
+          </div>
+            @if(!empty($errors->first('reg_telepon')))
+            <p class="text-red"><i class="icon fa fa-ban"></i> {{ $errors->first('reg_telepon') }}</p>
+            @endif
+
+          <div class="form-group">
+            <label for="alamat" class="control-label">Alamat </label>
+            <div class="col-sm-10">
+                  <div class="table-responsive">  
+                        <table class="table table-bordered" id="dynamic_field">
+
+                            <tr>  
+                                <td><input type="text" name="alamat[0]" class="form-control name_list" required="" /></td>  
+                                <td><button type="button" name="add" id="add" class="btn btn-success">+</button></td>  
+                            </tr>  
+                        </table> 
+                    </div>
+            </div>
+          </div>
+
+          @if(!empty($errors->first('reg_alamat')))
+            <p class="text-red"><i class="icon fa fa-ban"></i> {{ $errors->first('reg_alamat') }}</p>
+            @endif
+                
+            
+
           <div class="row">
             <!-- /.col -->
             <div class="col-12">
@@ -109,5 +142,33 @@
 <script src="{{url('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{url('dist/js/adminlte.min.js')}}"></script>
+<script type="text/javascript">
+  $(document).ready(function(){      
+    var i=1;
+    var b=0;
+    $('#add').click(function(){  
+         i++;  
+         b++;
+         $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added">\
+                        <td>\
+                          <input type="text" name="alamat['+b+']" class="form-control name_list" required />\
+                        </td>\
+                        <td>\
+                          <button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">-</button>\
+                        </td>\
+                        </tr>');  
+    });
+
+    $(document).on('click', '.btn_remove', function(){  
+         var button_id = $(this).attr("id");   
+         $('#row'+button_id+'').remove();  
+    });  
+
+  });
+  $(document).on('click', '.btn_remove_add', function(){  
+       var button_id = $(this).attr("id");   
+       $('#row_add'+button_id+'').remove();  
+  }); 
+</script>
 </body>
 </html>
