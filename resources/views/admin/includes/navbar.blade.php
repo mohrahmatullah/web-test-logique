@@ -4,10 +4,10 @@
   <ul class="navbar-nav ml-auto">
     
     <li class="nav-item">
-      {{-- <a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-secondary">Sign out</a>
+      <a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-secondary">Sign out</a>
       <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
           {{ csrf_field() }}
-      </form> --}}
+      </form>
     </li>
   </ul>
 </nav>

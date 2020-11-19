@@ -11,6 +11,47 @@
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Route::get( '/', [
+//     'uses' => 'AuthController@goToAdminLoginPage',
+//     'as'   => 'admin.login'
+//   ]);
+
 Route::group(['prefix' => '/'], function () {
-  route::get('/', 'HomeController@index')->name('/');
+  //admin login route
+  Route::get( '/', [
+    'uses' => 'AuthController@goToAdminLoginPage',
+    'as'   => 'admin.login'
+  ]);
+  Route::post( 'post-login' , [
+    'uses' => 'AuthController@postAdminLogin',
+    'as'   => 'admin.post_login'
+  ]);  
+  //admin logout route
+  Route::post( 'logout', [
+    'uses' => 'AuthController@logoutFromLogin',
+    'as'   => 'admin.logout'
+  ]);
+
+  Route::get('register', [
+    'uses' => 'AuthController@registration',
+    'as'   => 'admin.register'
+  ]);
+
+  Route::post('register', [
+    'uses' => 'AuthController@userRegistration',
+    'as'   => 'admin.post_register'
+  ]);
 });
+
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
+	route::get('products', 'DashboardController@index')->name('products');
+	route::get('products/{id}', 'DashboardController@productsUpdate')->name('update-products');
+	route::post('products/{id}', 'DashboardController@saveProducts')->name('save-products');
+  route::get('products/details/{id}', 'DashboardController@productsDetails')->name('view-products');
+});
+
+Route::post('/ajax/delete-item', 'AjaxController@selectedItemDeleteById')->name('selected-item-delete');
